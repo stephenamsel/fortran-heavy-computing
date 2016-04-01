@@ -1,0 +1,9 @@
+This is an extension of the Paramesh FE simulator.
+
+The first objective of this project is to replace the evolution module with a Crank-Nicholson or RK approach. The current approach is to use the HYPRE krylov-solver from LLNL for the implicit elements of those algorithms. That is expected to increase processing speed by well over an order of magnitude as evolution remains stable over larger time-steps.
+
+The second objective is to generalize the data-structure to handle an arbitrary number of dimensions. The current approach is to use "wrapped" and "unwrapped" versions of each block. The "unwrapped" version runs through evolution while the "wrapped" version interacts with models. This is to allow simulation of arbitrary parameter spaces, physical and otherwise.
+
+The third objective is to replace the tree-structure with a K-D tree so that mesh-adaptation happens in only one dimenion at a time. This should change the scaling of the memory-demands and runtime from exponential to, ideally, linear in numbers of dimensions. The advantage would depend upon the symmetries of the system being simulated. A possible improvement is to enable rotation of blocks to create that symmetry. this would require re-working the interpolation and copying of data into ghost-cells at the sides of neighboring blocks.
+
+The fourth objective is to create a user-friendly interface for model-input so that users need not know how to program in Fortran in order to input their models.
