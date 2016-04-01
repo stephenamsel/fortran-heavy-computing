@@ -28,13 +28,24 @@ module mcmc
 #if 0 THEN
 This is a Markov Chain Monte Carlo wrapper around a set of calculators, "calctophat" and "calcqc".
 It is optimized for parameter-space exploration as described here: http://arxiv.org/pdf/hep-ph/0407039v1.pdf .
-As noted on Page 5, the optimal acceptance-rate of new points in parameter-space is 23.38%, but it is typically more effective to seek a 1 in 4 acceptance-rate because that allows much faster adjustment of step-sizes.
-It achieves this goal by modifying the step-size dynamically, raising it when it is deemed unlikely that the acceptance-rate should be so low if the acceptance-probability is at or above 25% and lowering it when it is deemed unlikely that the acceptance-probability is at or below 25%. Smaller steps, in any system with a continuous posterior distribution, correspond to probabilities of acceptance closer to 1. As a result, if the initial value of the step is close to the correct order of magnitude, a sufficient burn-in should produce an optimized Markov chain.
 
-This example uses a quality criterion calculated by calcqc and combines it with another crierion, a tophat distribution. It targets a specific quantity for the calculator, qc = targ, exploring the space targ +/- targerr.
+It achieves this goal by modifying the step-size dynamically, raising it when it is deemed unlikely 
+that the acceptance-rate should be so low if the acceptance-probability is at or above 25% and 
+lowering it when it is deemed unlikely that the acceptance-probability is at or below 25%. 
+Smaller steps, in any system with a continuous posterior distribution, correspond to probabilities 
+of acceptance closer to 1. As a result, if the initial value of the step is close to the correct 
+order of magnitude, a sufficient burn-in should produce an optimized Markov chain. As noted on Page 5 
+of baltz & Gondolo, the optimal acceptance-rate of new points in parameter-space is 23.38%, 
+but it is typically more effective to seek a 1 in 4 acceptance-rate because that allows much 
+faster adjustment of step-sizes.
+
+This example uses a quality criterion calculated by calcqc and combines it with another 
+crierion, a tophat distribution. It targets a specific quantity for the calculator, qc = targ, 
+exploring the space targ +/- targerr. It is currently optimized to find input parameters matching measured outputs.
 
 The wrapper calculates only the next point in the chain. It it meant to be run in a loop with other elements.
-For example, one might want to output the value of param in the loop and run other anaylses on the parameters found before feeding in the next point.
+For example, one might want to output the value of param in the loop and run other anaylses on the 
+parameters found before feeding in the next point.
 
 MC calls step, calctophat, and calcqc
 #endif       
@@ -98,7 +109,8 @@ MC calls step, calctophat, and calcqc
 			acc = 0
                 end if
 !If prob = 0.25, P(7 consecutive rejected points) ~ 13% < P(1 sigma)
-!These are not exact inverses. 1.25 * .75 is not 1. This is deliberate. It allows the step-size to approach the optimal value regardless of what it is.
+!These are not exact inverses. 1.25 * .75 is not 1. This is deliberate. It allows the step-size 
+!to approach the optimal value regardless of what it is.
       	end if
      
         return
