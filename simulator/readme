@@ -4,6 +4,6 @@ The first objective of this project is to replace the evolution module with a Cr
 
 The second objective is to generalize the data-structure to handle an arbitrary number of dimensions. The current approach is to use "wrapped" and "unwrapped" versions of each block. The "unwrapped" version runs through evolution while the "wrapped" version interacts with models. This is to allow simulation of arbitrary parameter spaces, physical and otherwise.
 
-The third objective is currently private. Sorry, you'll just have to either join me in a private collaboration or wait for me to finish and publish the code.
+The third objective is to re-work the AMR to run one dimension at a time, using a K-D tree. Combined with a system to rotate blocks in order to align directions of variation with grid-directions and intelligent application of symmetries of most systems, this could achieve high-precision results with substantially fewer grid-elements, particularly in high-dimension simulations.
 
 The fourth objective is to create a user-friendly interface for model-input so that users need not know how to program in Fortran in order to input their models.
